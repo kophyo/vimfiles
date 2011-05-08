@@ -3,7 +3,7 @@ let g:CSApprox_verbose_level = 0
 
 "necessary on some Linux distros for pathogen to properly load bundles
 filetype off
-
+let mapleader=","
 "load pathogen managed plugins
 call pathogen#runtime_append_all_bundles()
 
