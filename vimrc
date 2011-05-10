@@ -72,6 +72,23 @@ set guioptions-=T
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 
+set list listchars=trail:.,extends:>
+
+" automatically remove trailing whitespace before write
+function! StripTrailingWhitespace()
+  normal mZ
+  %s/\s\+$//e
+  if line("'Z") != line(".")
+    echo "Stripped whitespace\n"
+  endif
+  normal `Z
+endfunction
+autocmd BufWritePre *.rb,*.feature,*.haml,*.js,*.css,*.sass :call StripTrailingWhitespace()
+
+map <F2> :call StripTrailingWhitespace()<CR>
+map! <F2> :call StripTrailingWhitespace()<CR>
+
+
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
 function! StatuslineTrailingSpaceWarning()
@@ -221,6 +238,16 @@ set hidden
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
+"map to CommandT TextMate style finder
+"nnoremap <leader>t :CommandT<CR>
+"nnoremap <silent> <C-f> t :CommandT<CR>
+nmap <C-f> :CommandT<CR>
+map <leader>f :CommandTFlush<CR>
+
+nmap vspa :vsp<CR>:A<CR>
+nmap RC :only<CR> :Rcontroller<CR> :vsp<CR> :A<CR>
+nmap RM :only<CR> :Rmodel<CR> :vsp<CR> :A<CR>
+
 if has("gui_running")
     "tell the term has 256 colors
     set t_Co=256
@@ -278,11 +305,6 @@ inoremap <C-L> <C-O>:nohls<CR>
 
 "map to bufexplorer
 nnoremap <leader>b :BufExplorer<cr>
-
-"map to CommandT TextMate style finder
-"nnoremap <leader>t :CommandT<CR>
-nnoremap <silent> <C-f> t :CommandT<CR>
-
 "map Q to something useful
 noremap Q gq
 
@@ -424,9 +446,6 @@ let g:user_zen_settings = {
   \  },
  \}
 
-"refresh fuzzy finder
-nmap <F5> :ruby finder.rescan!<CR>
-
 "aligns whole document and goes back to where you were
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
@@ -443,6 +462,7 @@ endfunction
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
 
+set list lcs=tab:·⁖,trail:¶
 "jQuery
 @au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
