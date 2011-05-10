@@ -307,11 +307,6 @@ inoremap <C-L> <C-O>:nohls<CR>
 
 "map to bufexplorer
 nnoremap <leader>b :BufExplorer<cr>
-
-"map to CommandT TextMate style finder
-"nnoremap <leader>t :CommandT<CR>
-nnoremap <silent> <C-f> t :CommandT<CR>
-
 "map Q to something useful
 noremap Q gq
 
