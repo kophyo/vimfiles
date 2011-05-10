@@ -22,7 +22,7 @@ set hlsearch    "hilight searches by default
 
 set number      "add line numbers
 set showbreak=...
-""set wrap linebreak nolist
+set nowrap linebreak nolist
 
 "mapping for command key to map navigation thru display lines instead
 "of just numbered lines
@@ -224,13 +224,13 @@ if has("gui_running")
 
     colorscheme railscasts
     set guitablabel=%M%t
-    set lines=40
-    set columns=115
+"    set lines=40
+"    set columns=115
 
     if has("gui_gnome")
         set term=gnome-256color
         colorscheme railscasts
-        set guifont=Monospace\ Bold\ 12
+        set guifont=Monospace\ Bold\ 9
     endif
 
     if has("gui_mac") || has("gui_macvim")
@@ -263,13 +263,12 @@ else
         colorscheme default
     endif
 endif
-
 " PeepOpen uses <Leader>p as well so you will need to redefine it so something
 " else in your ~/.vimrc file, such as:
 " nmap <silent> <Leader>q <Plug>PeepOpen
 
 silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
-nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
+"nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
@@ -279,7 +278,8 @@ inoremap <C-L> <C-O>:nohls<CR>
 nnoremap <leader>b :BufExplorer<cr>
 
 "map to CommandT TextMate style finder
-nnoremap <leader>t :CommandT<CR>
+"nnoremap <leader>t :CommandT<CR>
+nnoremap <silent> <C-f> t :CommandT<CR>
 
 "map Q to something useful
 noremap Q gq
@@ -404,4 +404,27 @@ let g:user_zen_settings = {
   \    'extends' : 'html',
   \  },
  \}
+
+"refresh fuzzy finder
+nmap <F5> :ruby finder.rescan!<CR>
+
+"aligns whole document and goes back to where you were
+function! Preserve(command)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+nmap _= :call Preserve("normal gg=G")<CR>
+
+"jQuery
+@au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
 
