@@ -307,6 +307,11 @@ inoremap <C-L> <C-O>:nohls<CR>
 
 "map to bufexplorer
 nnoremap <leader>b :BufExplorer<cr>
+
+"map to CommandT TextMate style finder
+"nnoremap <leader>t :CommandT<CR>
+nnoremap <silent> <C-f> t :CommandT<CR>
+
 "map Q to something useful
 noremap Q gq
 
@@ -467,6 +472,9 @@ function! MultiPreserve(command1, command2)
   call cursor(l, c)
 endfunction
 
+"refresh fuzzy finder
+nmap <F5> :ruby finder.rescan!<CR>
+
 "aligns whole document and goes back to where you were
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
@@ -491,3 +499,6 @@ set list lcs=tab:·⁖,trail:¶
 @au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 "Auto compile cofee scripts
 autocmd BufWritePost *.coffee silent CoffeeMake!
+"jQuery
+@au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
