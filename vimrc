@@ -85,6 +85,7 @@ autocmd BufWritePre *.rb,*.feature,*.haml,*.js,*.css,*.sass :call StripTrailingW
 map <F2> :call StripTrailingWhitespace()<CR>
 map! <F2> :call StripTrailingWhitespace()<CR>
 
+map <F3> :BufOnly<CR>
 
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
@@ -401,6 +402,7 @@ nmap <C-s> :w<CR>
 "key mapping for tab navigation
 nmap <Tab> gt
 nmap <S-Tab> gT
+nmap 
 
 "Key mapping for textmate-like indentation
 nmap <D-[> <<
