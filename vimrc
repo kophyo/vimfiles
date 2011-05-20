@@ -427,7 +427,6 @@ nmap <C-s> :w<CR>
 "key mapping for tab navigation
 nmap <Tab> gt
 nmap <S-Tab> gT
-nmap
 
 "Key mapping for textmate-like indentation
 nmap <D-[> <<
