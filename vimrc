@@ -86,6 +86,7 @@ map <F2> :call StripTrailingWhitespace()<CR>
 map! <F2> :call StripTrailingWhitespace()<CR>
 
 map <F3> :BufOnly<CR>
+map <F4> :BufOnly<CR>:bd<CR>
 
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
@@ -402,7 +403,6 @@ nmap <C-s> :w<CR>
 "key mapping for tab navigation
 nmap <Tab> gt
 nmap <S-Tab> gT
-nmap 
 
 "Key mapping for textmate-like indentation
 nmap <D-[> <<
@@ -448,5 +448,5 @@ nmap _= :call Preserve("normal gg=G")<CR>
 set list lcs=tab:·⁖,trail:¶
 "jQuery
 @au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
-
-
+"Auto compile cofee scripts
+autocmd BufWritePost *.coffee silent CoffeeMake!
