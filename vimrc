@@ -448,6 +448,20 @@ let g:user_zen_settings = {
   \  },
  \}
 
+"Hacky and none DRY but not so hot on vim scripting yet, and just want to get this working
+function! MultiPreserve(command1, command2)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command1
+  execute a:command2
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
 "aligns whole document and goes back to where you were
 function! Preserve(command)
   " Preparation: save last search, and cursor position.
@@ -460,6 +474,9 @@ function! Preserve(command)
   let @/=_s
   call cursor(l, c)
 endfunction
+
+nmap <F5> :call MultiPreserve("normal gg","sp")<CR>
+nmap <F6> :call MultiPreserve("normal gg","vsp")<CR>
 
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
