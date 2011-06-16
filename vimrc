@@ -328,7 +328,12 @@ map <A-j> :cnext<CR>
 map <A-k> :cprevious<CR>
 
 "key mapping for Gundo
-nnoremap <F4> :GundoToggle<CR>
+"nnoremap <F4> :GundoToggle<CR>
+"
+"Close all other buffers but this one
+map <F3> :BufOnly<CR>
+"Close all buffers
+map <F4> :BufOnly<CR>:bd <cr>
 
 "snipmate setup
 try
