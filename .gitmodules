@@ -143,3 +143,8 @@
 [submodule "plugin/gist-vim"]
 	path = plugin/gist-vim
 	url = https://github.com/mattn/gist-vim.git
+[submodule "vim-ruby-debugger"]
+	path = vim-ruby-debugger
+[submodule "bundle/vim-ruby-debugger"]
+	path = bundle/vim-ruby-debugger
+	url = https://github.com/astashov/vim-ruby-debugger.git
