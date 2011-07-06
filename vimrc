@@ -23,7 +23,8 @@ set showmode    "show current mode down the bottom
 set incsearch   "find the next match as we type the search
 set hlsearch    "hilight searches by default
 
-set number      "add line numbers
+"set number      "add line numbers
+set relativenumber
 set showbreak=...
 set nowrap linebreak nolist
 
@@ -256,8 +257,6 @@ if has("gui_running")
 
     colorscheme railscasts
     set guitablabel=%M%t
-"    set lines=40
-"    set columns=115
 
     if has("gui_gnome")
         set term=gnome-256color
@@ -266,20 +265,20 @@ if has("gui_running")
     endif
 
     if has("gui_mac") || has("gui_macvim")
-        set guifont=Menlo:h14
+        set guifont="Bitstream Vera Sans Mono"
         " key binding for Command-T to behave properly
         " uncomment to replace the Mac Command-T key to Command-T plugin
         "macmenu &File.New\ Tab key=<nop>
         "map <D-t> :CommandT<CR>
         " make Mac's Option key behave as the Meta key
         try
-          set transparency=5
+          set transparency=0
         catch
         endtry
     endif
 
     if has("gui_win32") || has("gui_win32s")
-        set guifont=Consolas:h12
+        set guifont=Consolas
         set enc=utf-8
     endif
 else
@@ -467,8 +466,6 @@ function! MultiPreserve(command1, command2)
   call cursor(l, c)
 endfunction
 
-"refresh fuzzy finder
-nmap <F5> :ruby finder.rescan!<CR>
 
 "aligns whole document and goes back to where you were
 function! Preserve(command)
@@ -485,6 +482,7 @@ endfunction
 
 nmap <F5> :call MultiPreserve("normal gg","sp")<CR>
 nmap <F6> :call MultiPreserve("normal gg","vsp")<CR>
+nmap <F7> :call MultiPreserve("normal vsp", "gf")<CR>
 
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap _= :call Preserve("normal gg=G")<CR>
