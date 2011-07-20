@@ -148,3 +148,15 @@
 [submodule "bundle/vim-ruby-debugger"]
 	path = bundle/vim-ruby-debugger
 	url = https://github.com/astashov/vim-ruby-debugger.git
+[submodule "bundle/rbrepl"]
+	path = bundle/rbrepl
+	url = https://github.com/Bogdanp/rbrepl.vim.git
+[submodule "vscommand"]
+	path = vscommand
+	url = git://repo.or.cz/vcscommand
+[submodule "bundle/vscommand"]
+	path = bundle/vscommand
+	url = git://repo.or.cz/vcscommand
+[submodule "bundle/vcscommand"]
+	path = bundle/vcscommand
+	url = git://repo.or.cz/vcscommand
