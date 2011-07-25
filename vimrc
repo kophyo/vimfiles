@@ -495,3 +495,20 @@ autocmd BufWritePost *.coffee silent CoffeeMake!
 "jQuery
 @au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
+let g:show_relative_numbers = 1
+
+
+
+function! ToggleRelativeLineNumber()
+  if g:show_relative_numbers
+    set number!
+  else
+    set relativenumber!
+  endif
+  let g:show_relative_numbers = !g:show_relative_numbers
+endfunction
+
+nnoremap ;l :call ToggleRelativeLineNumber()<cr>
+
+
+
