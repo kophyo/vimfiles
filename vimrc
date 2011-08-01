@@ -1,3 +1,6 @@
+"http://code.google.com/p/menghan-vimfiles/source/browse/vimrc_encoding.vim
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
+
 "avoiding annoying CSApprox warning message
 let g:CSApprox_verbose_level = 0
 
@@ -546,7 +549,9 @@ function ToggleHex()
   " restore values for modified and read only state
   let &mod=l:modified
   let &readonly=l:oldreadonly
-  let &modifiable=l:oldmodifiable
+let &modifiable=l:oldmodifiable
 endfunction
 
 nmap <F1> :call ToggleHex()<CR>
+vmap < <gv
+vmap > >gv
