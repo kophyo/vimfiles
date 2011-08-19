@@ -160,3 +160,6 @@
 [submodule "bundle/vcscommand"]
 	path = bundle/vcscommand
 	url = git://repo.or.cz/vcscommand
+[submodule "bundle/jshint"]
+	path = bundle/jshint
+	url = https://github.com/manalang/jshint.vim.git
