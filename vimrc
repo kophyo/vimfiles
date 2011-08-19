@@ -108,6 +108,13 @@ function! StatuslineTrailingSpaceWarning()
     return b:statusline_trailing_space_warning
 endfunction
 
+" Nicer regex syntax. Example usage:
+"S(<regex>)[<replacement>]<flags>
+function s:Substitute(sstring, line1, line2)
+  execute a:line1.",".a:line2."!perl -pi -e 'use encoding \"utf8\"; s'".
+        \escape(shellescape(a:sstring), '%!').
+        \" 2>/dev/null"
+endfunction
 
 "return the syntax highlight group under the cursor ''
 function! StatuslineCurrentHighlight()
@@ -551,3 +558,12 @@ endfunction
 nmap <F1> :call ToggleHex()<CR>
 vmap < <gv
 vmap > >gv
+
+set grepprg=ack\ -a
+
+compiler rubyunit
+nnoremap fd :cf /tmp/autotoest.txt:compiler rubyunit
+
+"CTRL C and CTRL x should work in normal Vim on the Mac now
+vmap <C-x> :!pbcopy<CR>
+vmap <C-c> :w !pbcopy<CR><CR>
