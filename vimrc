@@ -518,7 +518,7 @@ nnoremap ;l :call ToggleRelativeLineNumber()<cr>
 
 
 " helper function to toggle hex mode
-function ToggleHex()
+function! ToggleHex()
   " hex mode should be considered a read-only operation
   " save values for modified and read-only for restoration later,
   " and clear the read-only flag for now

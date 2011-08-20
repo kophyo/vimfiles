@@ -26,7 +26,7 @@ let g:colors_name = "railscasts2"
 " Light Green  #A5C261
 " Tan          #FFC66D
 
-hi Normal                    guifg=#E6E1DC guibg=#191919
+hi Normal                    guifg=#E6E1DC guibg=#202020
 hi Cursor                    guibg=#FFFFFF
 hi CursorLine                guibg=#333435
 hi LineNr                    guifg=#888888 guibg=#DEDEDE
@@ -65,7 +65,7 @@ hi Constant                  guifg=#6D9CBE
 
 "rubyClass, rubyModule, rubyDefine
 "def, end, include, etc
-hi Define                    guifg=#CC7833
+hi Define                    guifg=#FCB883
 
 "rubyInterpolation
 hi Delimiter                 guifg=#519F50
@@ -88,6 +88,7 @@ hi NonText                   guifg=#191919
 "rubyKeyword, rubyKeywordAsMethod
 "alias, undef, super, yield, callcc, caller, lambda, proc
 hi Keyword                   guifg=#CC7833
+
 
 " same as define
 hi Macro                     guifg=#CC7833 gui=NONE
