@@ -265,7 +265,7 @@ if has("gui_running")
     "tell the term has 256 colors
     set t_Co=256
 
-    colorscheme railscasts
+    colorscheme railscasts2
     set guitablabel=%M%t
 
     if has("gui_gnome")
@@ -294,7 +294,7 @@ else
     "set railscasts colorscheme when running vim in gnome terminal
     if $COLORTERM == 'gnome-terminal'
         set term=gnome-256color
-        colorscheme railscasts
+        colorscheme railscasts2
     else
         colorscheme default
     endif
@@ -562,8 +562,6 @@ vmap > >gv
 set grepprg=ack\ -a
 
 compiler rubyunit
-nnoremap fd :cf /tmp/autotoest.txt:compiler rubyunit
-
-"CTRL C and CTRL x should work in normal Vim on the Mac now
-vmap <C-x> :!pbcopy<CR>
-vmap <C-c> :w !pbcopy<CR><CR>
+"nnoremap fd :cf /tmp/autotoest.txt:compiler rubyunit
+set guioptions+=LlRrb
+set guioptions-=LlRrb
