@@ -84,7 +84,8 @@ hi Identifier                guifg=#6D9CBE gui=NONE
 "include, autoload, extend, load, require
 hi Include                   guifg=#CC7833 gui=NONE
 
-hi NonText                   guifg=#191919
+hi NonText                   guifg=#222222
+hi VertSplit                 guifg=#252525           guibg=#252525
 "rubyKeyword, rubyKeywordAsMethod
 "alias, undef, super, yield, callcc, caller, lambda, proc
 hi Keyword                   guifg=#CC7833
@@ -124,3 +125,4 @@ hi link htmlEndTag           xmlEndTag
 hi xmlTag                    guifg=#E8BF6A
 hi xmlTagName                guifg=#E8BF6A
 hi xmlEndTag                 guifg=#E8BF6A
+
