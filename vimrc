@@ -1,6 +1,6 @@
 "http://code.google.com/p/menghan-vimfiles/source/browse/vimrc_encoding.vim
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
-
+set colorcolumn=80
 "avoiding annoying CSApprox warning message
 let g:CSApprox_verbose_level = 0
 
