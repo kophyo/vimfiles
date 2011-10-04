@@ -163,3 +163,9 @@
 [submodule "bundle/jshint"]
 	path = bundle/jshint
 	url = https://github.com/manalang/jshint.vim.git
+[submodule "bundle/vim-session"]
+	path = bundle/vim-session
+	url = https://github.com/xolox/vim-session.git
+[submodule "bundle/lusty"]
+	path = bundle/lusty
+	url = https://github.com/sjbach/lusty.git
