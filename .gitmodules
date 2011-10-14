@@ -142,7 +142,7 @@
 	url = http://github.com/sjl/gundo.vim.git
 [submodule "plugin/gist-vim"]
 	path = plugin/gist-vim
-	url = http://github.com/mattn/gist-vim.git
+	url = https://github.com/mattn/gist-vim.git
 [submodule "bundle/vim-yankring"]
 	path = bundle/vim-yankring
 	url = git://github.com/chrismetcalf/vim-yankring.git
@@ -151,4 +151,29 @@
 	url = git://github.com/tpope/vim-bundler.git
 [submodule "bundle/vim-rvm"]
 	path = bundle/vim-rvm
-	url = git://github.com/tpope/vim-rvm.git
+[submodule "vim-ruby-debugger"]
+	path = vim-ruby-debugger
+[submodule "bundle/vim-ruby-debugger"]
+	path = bundle/vim-ruby-debugger
+	url = https://github.com/astashov/vim-ruby-debugger.git
+[submodule "bundle/rbrepl"]
+	path = bundle/rbrepl
+	url = https://github.com/Bogdanp/rbrepl.vim.git
+[submodule "vscommand"]
+	path = vscommand
+	url = git://repo.or.cz/vcscommand
+[submodule "bundle/vscommand"]
+	path = bundle/vscommand
+	url = git://repo.or.cz/vcscommand
+[submodule "bundle/vcscommand"]
+	path = bundle/vcscommand
+	url = git://repo.or.cz/vcscommand
+[submodule "bundle/jshint"]
+	path = bundle/jshint
+	url = https://github.com/manalang/jshint.vim.git
+[submodule "bundle/vim-session"]
+	path = bundle/vim-session
+	url = https://github.com/xolox/vim-session.git
+[submodule "bundle/lusty"]
+	path = bundle/lusty
+	url = https://github.com/sjbach/lusty.git

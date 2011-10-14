@@ -1,10 +1,15 @@
+"http://code.google.com/p/menghan-vimfiles/source/browse/vimrc_encoding.vim
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
+let g:session_autosave = 'yes'
+
+set colorcolumn=80
 "avoiding annoying CSApprox warning message
 let g:CSApprox_verbose_level = 0
 
 "necessary on some Linux distros for pathogen to properly load bundles
 filetype on
 filetype off
-
+let mapleader=","
 "load pathogen managed plugins
 call pathogen#runtime_append_all_bundles()
 
@@ -24,9 +29,10 @@ set showmode    "show current mode down the bottom
 set incsearch   "find the next match as we type the search
 set hlsearch    "hilight searches by default
 
-set number      "add line numbers
+"set number      "add line numbers
+set relativenumber
 set showbreak=...
-set wrap linebreak nolist
+set nowrap linebreak nolist
 
 "mapping for command key to map navigation thru display lines instead
 "of just numbered lines
@@ -73,6 +79,25 @@ set guioptions-=T
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 
+set list listchars=trail:.,extends:>
+
+" automatically remove trailing whitespace before write
+function! StripTrailingWhitespace()
+  normal mZ
+  %s/\s\+$//e
+  if line("'Z") != line(".")
+    echo "Stripped whitespace\n"
+  endif
+  normal `Z
+endfunction
+autocmd BufWritePre *.rb,*.feature,*.haml,*.js,*.css,*.sass :call StripTrailingWhitespace()
+
+map <F2> :call StripTrailingWhitespace()<CR>
+map! <F2> :call StripTrailingWhitespace()<CR>
+
+map <F3> :BufOnly<CR>
+map <F4> :BufOnly<CR>:bd<CR>
+
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
 function! StatuslineTrailingSpaceWarning()
@@ -86,6 +111,13 @@ function! StatuslineTrailingSpaceWarning()
     return b:statusline_trailing_space_warning
 endfunction
 
+" Nicer regex syntax. Example usage:
+"S(<regex>)[<replacement>]<flags>
+function s:Substitute(sstring, line1, line2)
+  execute a:line1.",".a:line2."!perl -pi -e 'use encoding \"utf8\"; s'".
+        \escape(shellescape(a:sstring), '%!').
+        \" 2>/dev/null"
+endfunction
 
 "return the syntax highlight group under the cursor ''
 function! StatuslineCurrentHighlight()
@@ -205,8 +237,7 @@ set sidescrolloff=7
 set sidescroll=1
 
 "load ftplugins and indent files
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 "turn on syntax highlighting
 syntax on
@@ -222,23 +253,31 @@ set hidden
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
+"map to CommandT TextMate style finder
+"nnoremap <leader>t :CommandT<CR>
+"nnoremap <silent> <C-f> t :CommandT<CR>
+nmap <C-f> :CommandT<CR>
+map <leader>f :CommandTFlush<CR>
+
+nmap vspa :vsp<CR>:A<CR>
+nmap RC :only<CR> :Rcontroller<CR> :vsp<CR> :A<CR>
+nmap RM :only<CR> :Rmodel<CR> :vsp<CR> :A<CR>
+
 if has("gui_running")
     "tell the term has 256 colors
     set t_Co=256
 
-    colorscheme railscasts
+    colorscheme railscasts2
     set guitablabel=%M%t
-    set lines=40
-    set columns=115
 
     if has("gui_gnome")
         set term=gnome-256color
         colorscheme railscasts
-        set guifont=Monospace\ Bold\ 12
+        set guifont=Monospace\ Bold\ 9
     endif
 
     if has("gui_mac") || has("gui_macvim")
-        set guifont=Menlo:h14
+        set guifont="Bitstream Vera Sans Mono"
         " key binding for Command-T to behave properly
         " uncomment to replace the Mac Command-T key to Command-T plugin
         "macmenu &File.New\ Tab key=<nop>
@@ -247,7 +286,7 @@ if has("gui_running")
     endif
 
     if has("gui_win32") || has("gui_win32s")
-        set guifont=Consolas:h12
+        set guifont=Consolas
         set enc=utf-8
     endif
 else
@@ -257,18 +296,17 @@ else
     "set railscasts colorscheme when running vim in gnome terminal
     if $COLORTERM == 'gnome-terminal'
         set term=gnome-256color
-        colorscheme railscasts
+        colorscheme railscasts2
     else
         colorscheme default
     endif
 endif
-
 " PeepOpen uses <Leader>p as well so you will need to redefine it so something
 " else in your ~/.vimrc file, such as:
 " nmap <silent> <Leader>q <Plug>PeepOpen
 
 silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
-nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
+"nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
 
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
@@ -276,10 +314,6 @@ inoremap <C-L> <C-O>:nohls<CR>
 
 "map to bufexplorer
 nnoremap <leader>b :BufExplorer<cr>
-
-"map to CommandT TextMate style finder
-nnoremap <leader>t :CommandT<CR>
-
 "map Q to something useful
 noremap Q gq
 
@@ -301,7 +335,12 @@ map <A-j> :cnext<CR>
 map <A-k> :cprevious<CR>
 
 "key mapping for Gundo
-nnoremap <F4> :GundoToggle<CR>
+"nnoremap <F4> :GundoToggle<CR>
+"
+"Close all other buffers but this one
+map <F3> :BufOnly<CR>
+"Close all buffers
+map <F4> :BufOnly<CR>:bd <cr>
 
 "snipmate setup
 try
@@ -421,3 +460,111 @@ let g:user_zen_settings = {
   \  },
  \}
 
+"Hacky and none DRY but not so hot on vim scripting yet, and just want to get this working
+function! MultiPreserve(command1, command2)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command1
+  execute a:command2
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+
+"aligns whole document and goes back to where you were
+function! Preserve(command)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+nmap <F5> :call MultiPreserve("normal gg","sp")<CR>
+nmap <F6> :call MultiPreserve("normal gg","vsp")<CR>
+nmap <F7> :call MultiPreserve("normal vsp", "gf")<CR>
+
+nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+nmap _= :call Preserve("normal gg=G")<CR>
+
+set list lcs=tab:·⁖,trail:¶
+"jQuery
+@au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
+"Auto compile cofee scripts
+autocmd BufWritePost *.coffee silent CoffeeMake!
+"jQuery
+@au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
+let g:show_relative_numbers = 1
+
+
+
+function! ToggleRelativeLineNumber()
+  if g:show_relative_numbers
+    set number!
+  else
+    set relativenumber!
+  endif
+  let g:show_relative_numbers = !g:show_relative_numbers
+endfunction
+
+nnoremap ;l :call ToggleRelativeLineNumber()<cr>
+
+
+" helper function to toggle hex mode
+function! ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+let &modifiable=l:oldmodifiable
+endfunction
+
+nmap <F1> :call ToggleHex()<CR>
+vmap < <gv
+vmap > >gv
+
+set grepprg=ack\ -a
+
+compiler rubyunit
+"nnoremap fd :cf /tmp/autotoest.txt:compiler rubyunit
+set guioptions+=LlRrb
+set guioptions-=LlRrb

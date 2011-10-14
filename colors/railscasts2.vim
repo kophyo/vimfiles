@@ -1,13 +1,13 @@
 " Vim color scheme
 "
 " Name:        railscast.vim
-" Maintainer:  Josh O'Rourke <jorourke23@gmail.com> 
+" Maintainer:  Josh O'Rourke <jorourke23@gmail.com>
 " License:     public domain
 "
 " A GUI Only port of the RailsCasts TextMate theme [1] to Vim.
 " Some parts of this theme were borrowed from the well-documented Lucius theme [2].
-" 
-" [1] http://railscasts.com/about 
+"
+" [1] http://railscasts.com/about
 " [2] http://www.vim.org/scripts/script.php?script_id=2536
 
 set background=dark
@@ -15,7 +15,7 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name = "railscasts"
+let g:colors_name = "railscasts2"
 
 " Colors
 " Brown        #BC9458
@@ -26,7 +26,7 @@ let g:colors_name = "railscasts"
 " Light Green  #A5C261
 " Tan          #FFC66D
 
-hi Normal                    guifg=#E6E1DC guibg=#2B2B2B
+hi Normal                    guifg=#E6E1DC guibg=#202020
 hi Cursor                    guibg=#FFFFFF
 hi CursorLine                guibg=#333435
 hi LineNr                    guifg=#888888 guibg=#DEDEDE
@@ -65,7 +65,7 @@ hi Constant                  guifg=#6D9CBE
 
 "rubyClass, rubyModule, rubyDefine
 "def, end, include, etc
-hi Define                    guifg=#CC7833
+hi Define                    guifg=#FCB883
 
 "rubyInterpolation
 hi Delimiter                 guifg=#519F50
@@ -78,15 +78,18 @@ hi Function                  guifg=#FFC66D gui=NONE
 
 "rubyIdentifier
 "@var, @@var, $var, etc
-hi Identifier                guifg=#D0D0FF gui=NONE
+hi Identifier                guifg=#6D9CBE gui=NONE
 
 "rubyInclude
 "include, autoload, extend, load, require
 hi Include                   guifg=#CC7833 gui=NONE
 
+hi NonText                   guifg=#222222
+hi VertSplit                 guifg=#252525           guibg=#252525
 "rubyKeyword, rubyKeywordAsMethod
 "alias, undef, super, yield, callcc, caller, lambda, proc
 hi Keyword                   guifg=#CC7833
+
 
 " same as define
 hi Macro                     guifg=#CC7833 gui=NONE
@@ -122,3 +125,4 @@ hi link htmlEndTag           xmlEndTag
 hi xmlTag                    guifg=#E8BF6A
 hi xmlTagName                guifg=#E8BF6A
 hi xmlEndTag                 guifg=#E8BF6A
+
