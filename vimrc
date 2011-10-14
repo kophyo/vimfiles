@@ -1,5 +1,7 @@
 "http://code.google.com/p/menghan-vimfiles/source/browse/vimrc_encoding.vim
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
+let g:session_autosave = 'yes'
+
 set colorcolumn=80
 "avoiding annoying CSApprox warning message
 let g:CSApprox_verbose_level = 0
@@ -234,8 +236,7 @@ set sidescrolloff=7
 set sidescroll=1
 
 "load ftplugins and indent files
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 "turn on syntax highlighting
 syntax on
@@ -496,6 +497,7 @@ nmap _= :call Preserve("normal gg=G")<CR>
 set list lcs=tab:·⁖,trail:¶
 "jQuery
 @au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
 "Auto compile cofee scripts
 autocmd BufWritePost *.coffee silent CoffeeMake!
 "jQuery
