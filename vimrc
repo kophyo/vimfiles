@@ -1,6 +1,6 @@
 "http://code.google.com/p/menghan-vimfiles/source/browse/vimrc_encoding.vim
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,sjis,euc-kr,ucs-2le,latin1
-let g:session_autosave = 'yes'
+let g:session_autoload = 'no'
 
 set colorcolumn=80
 "avoiding annoying CSApprox warning message
@@ -269,6 +269,7 @@ if has("gui_running")
 
     colorscheme railscasts2
     set guitablabel=%M%t
+    set guifont="Monaco"
 
     if has("gui_gnome")
         set term=gnome-256color
@@ -278,6 +279,7 @@ if has("gui_running")
 
     if has("gui_mac") || has("gui_macvim")
         set guifont="Bitstream Vera Sans Mono"
+        set guifont="Monaco"
         " key binding for Command-T to behave properly
         " uncomment to replace the Mac Command-T key to Command-T plugin
         "macmenu &File.New\ Tab key=<nop>
@@ -568,3 +570,5 @@ compiler rubyunit
 "nnoremap fd :cf /tmp/autotoest.txt:compiler rubyunit
 set guioptions+=LlRrb
 set guioptions-=LlRrb
+
+autocmd User Rails Rnavcommand fabricator spec/fabricators -suffix=_fabricator.rb -default=model()
