@@ -125,4 +125,4 @@ hi link htmlEndTag           xmlEndTag
 hi xmlTag                    guifg=#E8BF6A
 hi xmlTagName                guifg=#E8BF6A
 hi xmlEndTag                 guifg=#E8BF6A
-
+hi ColorColumn               ctermbg=black guibg=#000000
