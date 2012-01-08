@@ -2,5 +2,7 @@
 "Reassert that no flash or beep is wanted.
 set visualbell t_vb=
 
-macm Window.Select\ Previous\ Tab  key=<D-S-Left>
-macm Window.Select\ Next\ Tab      key=<D-S-Right>
+if has("gui_mac") || has("gui_macvim")
+  macm Window.Select\ Previous\ Tab  key=<D-S-Left>
+  macm Window.Select\ Next\ Tab      key=<D-S-Right>
+endif
