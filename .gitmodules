@@ -151,6 +151,7 @@
 	url = git://github.com/tpope/vim-bundler.git
 [submodule "bundle/vim-rvm"]
 	path = bundle/vim-rvm
+	url = https://github.com/tpope/vim-rvm.git
 [submodule "vim-ruby-debugger"]
 	path = vim-ruby-debugger
 [submodule "bundle/vim-ruby-debugger"]
