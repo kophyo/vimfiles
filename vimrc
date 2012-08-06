@@ -30,7 +30,7 @@ set incsearch   "find the next match as we type the search
 set hlsearch    "hilight searches by default
 
 "set number      "add line numbers
-set relativenumber
+set number
 set showbreak=...
 set nowrap linebreak nolist
 
@@ -62,16 +62,16 @@ set fo=l
 set statusline=%f       "tail of the filename
 
 "Git
-set statusline+=%{fugitive#statusline()}
+"set statusline+=%{fugitive#statusline()}
 
 "RVM
-set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
+"set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
 
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-set laststatus=2
+"set statusline+=%=      "left/right separator
+"set statusline+=%c,     "cursor column
+"set statusline+=%l/%L   "cursor line/total lines
+"set statusline+=\ %P    "percent through file
+"set laststatus=2
 
 "turn off needless toolbar on gvim/mvim
 set guioptions-=T
@@ -501,10 +501,18 @@ set list lcs=tab:·⁖,trail:¶
 "jQuery
 @au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
+
 "Auto compile cofee scripts
 autocmd BufWritePost *.coffee silent CoffeeMake!
 "jQuery
-@au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
+"haml
+au BufNewFile,BufRead {*.hamlbars,*.hbs,*.hamlc}                        set ft=haml
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
+
+
+
 
 let g:show_relative_numbers = 1
 
